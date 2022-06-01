@@ -37,7 +37,6 @@
 }
 
 table {
-    margin-top: 2%;
     width:100%;
     border: 1px solid rgb(35, 209, 200);
 }
@@ -67,6 +66,16 @@ td{
     border-color: rgb(35, 209, 200);
 
 }
+
+/* Search bar */
+#search {
+    margin-top: 2%;
+    width: 40%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px;
+  }
 
 /*Popup*/
 .popup {

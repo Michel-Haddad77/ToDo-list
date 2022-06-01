@@ -102,7 +102,7 @@ function currentDate(){
     let date = new Date();
     let time = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
     let today = String(date.getDate()).padStart(2, '0') + "/" + String(date.getMonth() +1).padStart(2, '0') + "/" + date.getFullYear();
-    return (time + " " + today)
+    return (today + " " + time)
 }
 
 //function that returns a random id
