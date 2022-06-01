@@ -8,18 +8,25 @@ function currentDate(){
 
 console.log(currentDate());
 
-
+//function that returns a random id
 function generateId(){
     return Math.floor(Math.random()*1000);
 }
 
+
+function createTodo(){
+    //create todo row
+    let row = $("<tr></tr>");
+    $("table").append(row);
+
+    let id_td = $("<td></td");
+    id_td.text("id 5"); //to be changed to generated id
+    row.append(id_td);
+
+}
+
 //when the user clicks the create button
 $("#create").click(function(){
-    // $("p").hide();
-    // let title = $("#title").val();
-    // let desc = $("#description").val();
-    // $("table").append('<div class="todo">' + title + '</div><div class="todo">' + desc + '</div><div class="todo"></div>')
-
-    $(this).css("background-color","yellow");
+    createTodo();
   });
 
