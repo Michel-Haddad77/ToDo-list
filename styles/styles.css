@@ -20,7 +20,7 @@
     margin-top: 50px;
     gap: 5px;
 }
-button{
+#create{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: rgb(35, 209, 200);
     color: aliceblue;
@@ -33,10 +33,15 @@ button{
     text-align: center;
 }
 
-.todo-container{
+/* .todo-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+} */
+
+table{
+    margin-top: 2%;
+    width:100%;
 }
 
 label{
@@ -45,8 +50,6 @@ label{
 
 }
 
-.todo{
-    border-radius: 5px;
-    border-color: rgb(35, 209, 200);
-    border-style: solid;
+th{
+    text-align: left;
 }
