@@ -176,6 +176,27 @@ $(document).ready(function(){
         $(".popup").hide();
         alert("refresh page to update");
     })
-})
 
+    //search bar functionality
+    $("#search").keyup(function(){
+        //store value entered on each key press
+        let search_word = $(this).val();
+        let rows = $("tr");
+
+        //check the value of all titles (3rd column) 
+        $("td:nth-child(3)").each(function(){
+            let data = $(this).text();
+
+            //check if searched value exists in title value
+            if(data.indexOf(search_word)===-1){
+                //hide the row if there is no match
+                $(this).parent().hide();
+            }else{
+                //make row reappear if it was hidden
+                $(this).parent().show();
+            }
+        })
+    })
+
+})
 
