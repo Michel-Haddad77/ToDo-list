@@ -1,62 +1,63 @@
 class Todo {
-    constructor(id, title, description, priority, time, is_done = false) {
+    constructor(id, title, description, priority, time) {
       this.id = id;
-      this.title = description;
+      this.title = title;
+      this.description = description;
       this.priority = priority;
       this.time = time;
-      this.is_done = is_done;
     }
     createTodo() {
       //create todo row
-    let row = $("<tr></tr>");
-    $("table").append(row);
+        let row = $("<tr></tr>");
+        $("table").append(row);
 
-    //create id section
-    let id_td = $("<td></td");
-    id_td.text("id 5"); //to be changed to generated id
-    row.append(id_td);
+        //create id section
+        let id_td = $("<td></td>");
+        id_td.text(this.id);
+        row.append(id_td);
 
-    //create title section
-    let title_td = $("<td></td");
-    title_td.text("id 5"); //to be changed to title
-    row.append(title_td);
+        //create title section
+        let title_td = $("<td></td>");
+        title_td.text(this.title); //to be changed to title
+        row.append(title_td);
 
-    //create description section
-    let description_td = $("<td></td");
-    description_td.text("id 5"); //to be changed to description
-    row.append(description_td);
-    
-    //create priority section
-    let priority_td = $("<td></td");
-    priority_td.text("id 5"); //to be changed to priority
-    row.append(priority_td);
+        //create description section
+        let description_td = $("<td></td>");
+        description_td.text(this.description); //to be changed to description
+        row.append(description_td);
+        
+        //create priority section
+        let priority_td = $("<td></td>");
+        priority_td.text(this.priority); //to be changed to priority
+        row.append(priority_td);
 
-    //create date section
-    let created_at_td = $("<td></td");
-    created_at_td.text(currentDate());
-    row.append(created_at_td);
+        //create date section
+        let created_at_td = $("<td></td>");
+        created_at_td.text(this.time);
+        row.append(created_at_td);
 
-    //create done? section
-    let done_td = $("<td></td");
-    done_td.text("id 5"); //to be changed to done(yes,no)
-    row.append(done_td);
+        //create done? section
+        let done_td = $("<td></td>");
+        done_td.text("No"); //to be changed to done(yes,no)
+        row.append(done_td);
 
-    //create  row for edit, delete, done buttons
-    let buttons_td = $("<td></td");
-    row.append(buttons_td);
+        //create  row for edit, delete, done buttons
+        let buttons_td = $("<td></td>");
+        row.append(buttons_td);
 
-    //create edite ,delete ,done buttons
-    let edit_btn = $("<i></i>");
-    edit_btn.addClass("fa fa-edit fa-xl");
-    buttons_td.append(edit_btn);
+        //create edite ,delete ,done buttons
+        let edit_btn = $("<i></i>");
+        edit_btn.addClass("fa fa-edit fa-xl");
+        buttons_td.append(edit_btn);
 
-    let delete_btn = $("<i></i>");
-    delete_btn.addClass("fa fa-trash fa-xl");
-    buttons_td.append(delete_btn);
+        let delete_btn = $("<i></i>");
+        delete_btn.addClass("fa fa-trash fa-xl");
+        buttons_td.append(delete_btn);
 
-    let done_btn = $("<i></i>");
-    done_btn.addClass("fa fa-check fa-xl");
-    buttons_td.append(done_btn);
+        let done_btn = $("<i></i>");
+        done_btn.addClass("fa fa-check fa-xl");
+        buttons_td.append(done_btn);
+        
     }
   }
 
@@ -77,5 +78,13 @@ function generateId(){
 
 //when the user clicks the create button
 $("#create").click(function(){
+    let id = generateId();
+    let title = $("#title").val();
+    let description = $("#description").val();
+    let priority = $("#priority").val();
+    let current_date = currentDate();
+
+    let new_todo = new Todo(id,title,description,priority,current_date);
+    new_todo.createTodo();
   });
 
