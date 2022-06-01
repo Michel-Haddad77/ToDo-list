@@ -10,9 +10,19 @@ class Todo {
 
     //Method that creates todo from the given values
     createTodo() {
-      //create todo row
+        //create todo row
         let row = $("<tr></tr>");
         $("table").append(row);
+
+        //create done? section
+        let done_td = $("<td></td>");
+        row.append(done_td);
+
+        //done button
+        let done_btn = $("<i></i>");
+        done_btn.addClass("fa fa-check fa-xl");
+        done_btn.attr("data-id",this.id);
+        done_td.append(done_btn);
 
         //create id section
         let id_td = $("<td></td>");
@@ -45,16 +55,13 @@ class Todo {
         created_at_td.text(this.time);
         row.append(created_at_td);
 
-        //create done? section
-        let done_td = $("<td></td>");
-        done_td.text("No"); //to be changed to done(yes,no)
-        row.append(done_td);
 
-        //create  row for edit, delete, done buttons
+
+        //create  row for edit and delete buttons
         let buttons_td = $("<td></td>");
         row.append(buttons_td);
 
-        //create edite ,delete ,done buttons
+        //create edite and delete  buttons
         let edit_btn = $("<i></i>");
         edit_btn.addClass("fa fa-edit fa-xl");
         edit_btn.attr("data-id",this.id);
@@ -65,10 +72,7 @@ class Todo {
         delete_btn.attr("data-id",this.id);
         buttons_td.append(delete_btn);
 
-        let done_btn = $("<i></i>");
-        done_btn.addClass("fa fa-check fa-xl");
-        done_btn.attr("data-id",this.id);
-        buttons_td.append(done_btn);
+
         
     }
   }
