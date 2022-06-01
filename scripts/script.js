@@ -1,21 +1,13 @@
-//function that returns the current time and date
-function currentDate(){
-    let date = new Date();
-    let time = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
-    let today = String(date.getDate()).padStart(2, '0') + "/" + String(date.getMonth() +1).padStart(2, '0') + "/" + date.getFullYear();
-    return (time + " " + today)
-}
-
-console.log(currentDate());
-
-//function that returns a random id
-function generateId(){
-    return Math.floor(Math.random()*1000);
-}
-
-//function that creates a todo row
-function createTodo(){
-    //create todo row
+class Todo {
+    constructor(id, title, description, priority, time, is_done = false) {
+      this.id = id;
+      this.title = description;
+      this.priority = priority;
+      this.time = time;
+      this.is_done = is_done;
+    }
+    createTodo() {
+      //create todo row
     let row = $("<tr></tr>");
     $("table").append(row);
 
@@ -65,11 +57,25 @@ function createTodo(){
     let done_btn = $("<i></i>");
     done_btn.addClass("fa fa-check fa-xl");
     buttons_td.append(done_btn);
+    }
+  }
 
+//function that returns the current time and date
+function currentDate(){
+    let date = new Date();
+    let time = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
+    let today = String(date.getDate()).padStart(2, '0') + "/" + String(date.getMonth() +1).padStart(2, '0') + "/" + date.getFullYear();
+    return (time + " " + today)
+}
+
+console.log(currentDate());
+
+//function that returns a random id
+function generateId(){
+    return Math.floor(Math.random()*1000);
 }
 
 //when the user clicks the create button
 $("#create").click(function(){
-    createTodo();
   });
 
