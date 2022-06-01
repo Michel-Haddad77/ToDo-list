@@ -118,15 +118,22 @@ $("#create").click(function(){
     localStorage.setItem(id, JSON.stringify(new_todo));
   });
 
-//when the user clicks on delete icon
+
 $(document).ready(function(){
-$(".fa-trash").click(function(){
-    //remove the row of the clicked button
-    $(this).parent().parent().remove();
+    //when the user clicks on delete icon
+    $(".fa-trash").click(function(){
+        //remove the row of the clicked button
+        $(this).parent().parent().remove();
 
-    //remove the associated todo from local storage
-    var todo_id = $(this).attr("data-id");
-    localStorage.removeItem(todo_id);
+        //remove the associated todo from local storage
+        var todo_id = $(this).attr("data-id");
+        localStorage.removeItem(todo_id);
+    })
 
+    //when the user clicks on edit button
+    $(".fa-edit").click(function(){
+        $(".popup").css("display","block");
+    })
 })
-})
+
+
