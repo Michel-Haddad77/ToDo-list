@@ -77,16 +77,19 @@ class Todo {
 $(document).ready(function(){
     //for each item in local storage
     for(let i = 0; i<localStorage.length; i++){
-        let saved_todo = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        let id = saved_todo.id;
-        let title = saved_todo.title;
-        let description = saved_todo.description;
-        let priority = saved_todo.priority;
-        let current_date = saved_todo.time;
+        //check if stored key is an id
+        if(Number.isInteger(parseInt(localStorage.key(i)))){
+            let saved_todo = JSON.parse(localStorage.getItem(localStorage.key(i)));
+            let id = saved_todo.id;
+            let title = saved_todo.title;
+            let description = saved_todo.description;
+            let priority = saved_todo.priority;
+            let current_date = saved_todo.time;
 
-        //create todo
-        let new_todo = new Todo(id,title,description,priority,current_date);
-        new_todo.createTodo();
+            //create todo
+            let new_todo = new Todo(id,title,description,priority,current_date);
+            new_todo.createTodo();
+        }
     }
 })
 
@@ -136,7 +139,8 @@ $(document).ready(function(){
     //when the user clicks on edit button
     $(".fa-edit").click(function(){
         $(".popup").show();
-        let id = $(this).attr("data-id");
+        let id_tobe_edited = $(this).attr("data-id");
+        localStorage.setItem("id_tobe_edited",id_tobe_edited);
 
         //when the user clicks the cancel button
         $("#cancel").click(function(){
@@ -144,29 +148,29 @@ $(document).ready(function(){
             $(".popup").hide();
         })
 
-        //when the user clicks apply
-        $("#apply").click(function(){
-            //read entered data from user
-            let new_title = $("#new-title").val();
-            let new_desc = $("#new-description").val();
-            let new_priority = $("#new-priority").val();
+    })
 
-            //get saved todo
-            let todo = JSON.parse(localStorage.getItem(id));
+    //when the user clicks apply in popup
+    $("#apply").click(function(){
+        //read entered data from user
+        let id = localStorage.getItem("id_tobe_edited");
+        let new_title = $("#new-title").val();
+        let new_desc = $("#new-description").val();
+        let new_priority = $("#new-priority").val();
 
-            //update todo values
-            todo.title = new_title;
-            todo.description = new_desc;
-            todo.priority = new_priority;
+        //get saved todo
+        let todo = JSON.parse(localStorage.getItem(id));
 
-            //update todo in local storage
-            localStorage.setItem(id,JSON.stringify(todo));
+        //update todo values
+        todo.title = new_title;
+        todo.description = new_desc;
+        todo.priority = new_priority;
 
-            $(".popup").hide();
-            
-        })
+        //update todo in local storage
+        localStorage.setItem(id,JSON.stringify(todo));
 
-
+        $(".popup").hide();
+        alert("refresh page to update");
     })
 })
 

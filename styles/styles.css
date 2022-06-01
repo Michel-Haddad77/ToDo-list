@@ -58,6 +58,9 @@ th{
 
 td{
     padding: 5px;
+    border-radius: 5px;
+    border-color: rgb(35, 209, 200);
+
 }
 
 /*Popup*/
