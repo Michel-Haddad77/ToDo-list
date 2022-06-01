@@ -132,7 +132,25 @@ $(document).ready(function(){
 
     //when the user clicks on edit button
     $(".fa-edit").click(function(){
-        $(".popup").css("display","block");
+        $(".popup").show();
+
+        //when the user clicks the cancel button
+        $("#cancel").click(function(){
+            //close the popup
+            $(".popup").hide();
+        })
+
+
+        $("#cancel").click(function(){
+            //read entered data from user
+            let new_title = $("#new-title").val();
+            let new_desc = $("#new-description").val();
+            let new_priority = $("#new-priority").val();
+        })
+
+
+
+
     })
 })
 
