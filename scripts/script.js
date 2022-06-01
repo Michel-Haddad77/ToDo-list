@@ -1,3 +1,4 @@
+
 class Todo {
     constructor(id, title, description, priority, time) {
       this.id = id;
@@ -6,6 +7,8 @@ class Todo {
       this.priority = priority;
       this.time = time;
     }
+
+    //Method that creates todo from the given values
     createTodo() {
       //create todo row
         let row = $("<tr></tr>");
@@ -61,6 +64,23 @@ class Todo {
     }
   }
 
+// on refresh, all the saved todos are fetched from local storag and created
+$(document).ready(function(){
+    //for each item in local storage
+    for(let i = 0; i<localStorage.length; i++){
+        let saved_todo = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        let id = saved_todo.id;
+        let title = saved_todo.title;
+        let description = saved_todo.description;
+        let priority = saved_todo.priority;
+        let current_date = saved_todo.time;
+
+        //create todo
+        let new_todo = new Todo(id,title,description,priority,current_date);
+        new_todo.createTodo();
+    }
+})
+
 //function that returns the current time and date
 function currentDate(){
     let date = new Date();
@@ -76,16 +96,18 @@ function generateId(){
 
 //when the user clicks the create button
 $("#create").click(function(){
+    //prepare information of Todo
     let id = generateId();
     let title = $("#title").val();
     let description = $("#description").val();
     let priority = $("#priority").val();
     let current_date = currentDate();
 
-
+    //create Todo
     let new_todo = new Todo(id,title,description,priority,current_date);
     new_todo.createTodo();
 
+    //store todo values in localstorage
     localStorage.setItem(id, JSON.stringify(new_todo));
   });
 
