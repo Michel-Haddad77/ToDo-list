@@ -24,6 +24,8 @@ class Todo {
         title_td.text(this.title);
         //added data-id for better manipulation
         title_td.attr("data-id",this.id);
+        //added data-edit to access element when user edits
+        title_td.attr("data-edit","title");
         row.append(title_td);
 
         //create description section
@@ -130,9 +132,11 @@ $(document).ready(function(){
         localStorage.removeItem(todo_id);
     })
 
+
     //when the user clicks on edit button
     $(".fa-edit").click(function(){
         $(".popup").show();
+        let id = $(this).attr("data-id");
 
         //when the user clicks the cancel button
         $("#cancel").click(function(){
@@ -140,15 +144,27 @@ $(document).ready(function(){
             $(".popup").hide();
         })
 
-
-        $("#cancel").click(function(){
+        //when the user clicks apply
+        $("#apply").click(function(){
             //read entered data from user
             let new_title = $("#new-title").val();
             let new_desc = $("#new-description").val();
             let new_priority = $("#new-priority").val();
+
+            //get saved todo
+            let todo = JSON.parse(localStorage.getItem(id));
+
+            //update todo values
+            todo.title = new_title;
+            todo.description = new_desc;
+            todo.priority = new_priority;
+
+            //update todo in local storage
+            localStorage.setItem(id,JSON.stringify(todo));
+
+            $(".popup").hide();
+            
         })
-
-
 
 
     })
