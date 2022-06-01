@@ -21,17 +21,21 @@ class Todo {
 
         //create title section
         let title_td = $("<td></td>");
-        title_td.text(this.title); //to be changed to title
+        title_td.text(this.title);
+        //added data-id for better manipulation
+        title_td.attr("data-id",this.id);
         row.append(title_td);
 
         //create description section
         let description_td = $("<td></td>");
-        description_td.text(this.description); //to be changed to description
+        description_td.text(this.description);
+        description_td.attr("data-id",this.id);
         row.append(description_td);
         
         //create priority section
         let priority_td = $("<td></td>");
-        priority_td.text(this.priority); //to be changed to priority
+        priority_td.text(this.priority);
+        priority_td.attr("data-id",this.id);
         row.append(priority_td);
 
         //create date section
@@ -51,14 +55,17 @@ class Todo {
         //create edite ,delete ,done buttons
         let edit_btn = $("<i></i>");
         edit_btn.addClass("fa fa-edit fa-xl");
+        edit_btn.attr("data-id",this.id);
         buttons_td.append(edit_btn);
 
         let delete_btn = $("<i></i>");
         delete_btn.addClass("fa fa-trash fa-xl");
+        delete_btn.attr("data-id",this.id);
         buttons_td.append(delete_btn);
 
         let done_btn = $("<i></i>");
         done_btn.addClass("fa fa-check fa-xl");
+        done_btn.attr("data-id",this.id);
         buttons_td.append(done_btn);
         
     }
@@ -114,7 +121,9 @@ $("#create").click(function(){
 //when the user clicks on delete icon
 $(document).ready(function(){
 $(".fa-trash").click(function(){
-
+    //remove the row of the clicked button
     $(this).parent().parent().remove();
+
+
 })
 })
