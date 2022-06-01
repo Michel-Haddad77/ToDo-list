@@ -69,8 +69,6 @@ function currentDate(){
     return (time + " " + today)
 }
 
-console.log(currentDate());
-
 //function that returns a random id
 function generateId(){
     return Math.floor(Math.random()*1000);
@@ -84,7 +82,10 @@ $("#create").click(function(){
     let priority = $("#priority").val();
     let current_date = currentDate();
 
+
     let new_todo = new Todo(id,title,description,priority,current_date);
     new_todo.createTodo();
+
+    localStorage.setItem(id, JSON.stringify(new_todo));
   });
 
