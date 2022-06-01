@@ -57,6 +57,10 @@ th{
     cursor: pointer;
 }
 
+.fa-trash{color: red;}
+
+.fa-check{color: green;}
+
 td{
     padding: 5px;
     border-radius: 5px;
@@ -87,10 +91,10 @@ td{
     width: fit-content; /* Could be more or less, depending on screen size */
   }
 
-  #apply{
-      margin-left: 30%;
-      margin-top: 3%;
-  }
+#apply{
+    margin-left: 30%;
+    margin-top: 3%;
+}
 
 /*Table styling*/
 #todos {
