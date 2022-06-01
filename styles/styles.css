@@ -39,9 +39,10 @@
     justify-content: center;
 } */
 
-table{
+table {
     margin-top: 2%;
     width:100%;
+    border: 1px solid rgb(35, 209, 200);
 }
 
 label{
