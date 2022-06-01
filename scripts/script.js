@@ -124,6 +124,9 @@ $(".fa-trash").click(function(){
     //remove the row of the clicked button
     $(this).parent().parent().remove();
 
+    //remove the associated todo from local storage
+    var todo_id = $(this).attr("data-id");
+    localStorage.removeItem(todo_id);
 
 })
 })
