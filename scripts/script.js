@@ -111,3 +111,10 @@ $("#create").click(function(){
     localStorage.setItem(id, JSON.stringify(new_todo));
   });
 
+//when the user clicks on delete icon
+$(document).ready(function(){
+$(".fa-trash").click(function(){
+
+    $(this).parent().parent().remove();
+})
+})
