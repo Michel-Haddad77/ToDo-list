@@ -13,7 +13,7 @@ function generateId(){
     return Math.floor(Math.random()*1000);
 }
 
-
+//function that creates a todo row
 function createTodo(){
     //create todo row
     let row = $("<tr></tr>");
