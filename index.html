@@ -23,7 +23,7 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-        <button type="button" id ="create">Create ToDo</button>
+        <button type="button" id ="create" class="button">Create ToDo</button>
     </div>
 
     <table>
@@ -55,8 +55,8 @@
     <!--Popup for Edit-->
     <div class="popup">
         <div class="popup-content">
-            <textarea id="title" rows="1" cols = "15" placeholder="Title"></textarea>
-            <textarea id="description" rows="1" cols="50" placeholder="Description"></textarea>
+            <textarea id="title" rows="1" cols = "15" placeholder="Title"></textarea> <br>
+            <textarea id="description" rows="5" cols="40" placeholder="Description"></textarea> <br>
             <label for="priority">Priority</label>
             <select id="priority">
                 <option value="1">1</option>
@@ -64,8 +64,9 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-            </select>
-            <button type="button">Create ToDo</button>
+            </select><br>
+            <button type="button" id="apply" class="button">Apply Changes</button>
+            <button type="button" class="button">Cancel</button>
         </div>
     </div>
 
