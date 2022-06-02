@@ -1,5 +1,15 @@
-//array to store finished todo objects
-var finished_todos = []
+
+//check if finished todos array is already in local storage
+if (localStorage.getItem("finished_todos_array") == undefined){
+
+    //creat a new array to store finished todo objects
+    var finished_todos = []
+}else{
+    //if it already exists in storage, fetch it
+    var finished_todos = JSON.parse(localStorage.getItem("finished_todos_array"));
+}
+
+
 
 class Todo {
     constructor(id, title, description, priority, time) {
@@ -75,7 +85,7 @@ class Todo {
     }
 }
 
-//function that creates finished task in table
+//function that creates finished task in the finished tasks table
 function createFinishedTodo(title,description,priority,time){
         //create todo row
         let row = $("<tr></tr>");
@@ -102,7 +112,7 @@ function createFinishedTodo(title,description,priority,time){
         row.append(created_at_td);
 }
 
-// on refresh, all the saved todos are fetched from local storage and created
+// on refresh, all the saved todos and finished todos are fetched from local storage and created
 $(document).ready(function(){
     //for each item in local storage
     for(let i = 0; i<localStorage.length; i++){
@@ -121,6 +131,20 @@ $(document).ready(function(){
         }
     }
 
+    //get finshed todos array from local storage
+    let saved_finished_todos = JSON.parse(localStorage.getItem("finished_todos_array"));
+
+
+    //create finished todo in finished tasks table        
+    for(let i = 0; i<saved_finished_todos.length; i++){
+
+        let title = saved_finished_todos[i].title;
+        let description = saved_finished_todos[i].description;
+        let priority = saved_finished_todos[i].priority;
+        let time = saved_finished_todos[i].time;
+
+        createFinishedTodo(title,description,priority,time);
+    }     
 
 })
 
@@ -152,6 +176,7 @@ $("#create").click(function(){
 
     //store todo values in localstorage
     localStorage.setItem(id, JSON.stringify(new_todo));
+
   });
 
 
@@ -225,9 +250,9 @@ $(document).ready(function(){
         })
     })
 
-    //TO BE FiXED 
     //when the user clicks on done button
     $(".fa-check").click(function(){
+
         //remove the row of the clicked button
         $(this).parent().parent().remove();
 
@@ -246,7 +271,7 @@ $(document).ready(function(){
         finished_todos.push(todo);
 
         //store array in local storage
-        localStorage.setItem("finished_todos_array", finished_todos);
+        localStorage.setItem("finished_todos_array", JSON.stringify(finished_todos));
 
         //remove the associated todo from local storage
         localStorage.removeItem(todo_id);
