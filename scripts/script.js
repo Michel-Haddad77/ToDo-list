@@ -227,9 +227,17 @@ $(document).ready(function(){
         $(this).parent().parent().remove();
 
         //create finished todo in finished tasks table
+        let todo_id = $(this).attr("data-id");
+        let todo = JSON.parse(localStorage.getItem(todo_id));
 
+        let title = todo.title;
+        let description = todo.description;
+        let priority = todo.priority;
+        let time = todo.time;
+
+        createFinishedTodo(title,description,priority,time);
+        
         //remove the associated todo from local storage
-        var todo_id = $(this).attr("data-id");
         localStorage.removeItem(todo_id);
 
     })
