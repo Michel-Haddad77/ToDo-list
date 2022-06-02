@@ -55,8 +55,6 @@ class Todo {
         created_at_td.text(this.time);
         row.append(created_at_td);
 
-
-
         //create  row for edit and delete buttons
         let buttons_td = $("<td></td>");
         row.append(buttons_td);
@@ -71,11 +69,36 @@ class Todo {
         delete_btn.addClass("fa fa-trash fa-xl");
         delete_btn.attr("data-id",this.id);
         buttons_td.append(delete_btn);
-
-
         
     }
-  }
+}
+
+//function that creates finished task in table
+function createFinishedTodo(title,description,priority,time){
+        //create todo row
+        let row = $("<tr></tr>");
+        $("#done-table").append(row);
+
+        //create title section
+        let title_td = $("<td></td>");
+        title_td.text(title);
+        row.append(title_td);
+
+        //create description section
+        let description_td = $("<td></td>");
+        description_td.text(description);
+        row.append(description_td);
+        
+        //create priority section
+        let priority_td = $("<td></td>");
+        priority_td.text(priority);
+        row.append(priority_td);
+
+        //create date section
+        let created_at_td = $("<td></td>");
+        created_at_td.text(time);
+        row.append(created_at_td);
+}
 
 // on refresh, all the saved todos are fetched from local storag and created
 $(document).ready(function(){
@@ -203,10 +226,11 @@ $(document).ready(function(){
         //remove the row of the clicked button
         $(this).parent().parent().remove();
 
+        //create finished todo in finished tasks table
+
         //remove the associated todo from local storage
         var todo_id = $(this).attr("data-id");
         localStorage.removeItem(todo_id);
-
 
     })
 
