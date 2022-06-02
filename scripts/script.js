@@ -12,7 +12,7 @@ class Todo {
     createTodo() {
         //create todo row
         let row = $("<tr></tr>");
-        $("table").append(row);
+        $("#todos-table").append(row);
 
         //create done? section
         let done_td = $("<td></td>");
@@ -196,6 +196,18 @@ $(document).ready(function(){
                 $(this).parent().show();
             }
         })
+    })
+
+    //when the user clicks on done button
+    $(".fa-check").click(function(){
+        //remove the row of the clicked button
+        $(this).parent().parent().remove();
+
+        //remove the associated todo from local storage
+        var todo_id = $(this).attr("data-id");
+        localStorage.removeItem(todo_id);
+
+
     })
 
 })
