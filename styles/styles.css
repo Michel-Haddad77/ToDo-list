@@ -64,7 +64,6 @@ td{
     padding: 5px;
     border-radius: 5px;
     border-color: rgb(35, 209, 200);
-
 }
 
 /* Search bar */
@@ -139,7 +138,7 @@ h2{
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 50%;
-    background-color: #f2f2f2;
+    background-color: grey;
     
 }
 

@@ -1,15 +1,12 @@
 
 //check if finished todos array is already in local storage
 if (localStorage.getItem("finished_todos_array") == undefined){
-
     //creat a new array to store finished todo objects
     var finished_todos = []
 }else{
     //if it already exists in storage, fetch it
     var finished_todos = JSON.parse(localStorage.getItem("finished_todos_array"));
 }
-
-
 
 class Todo {
     constructor(id, title, description, priority, time) {
@@ -85,6 +82,20 @@ class Todo {
     }
 }
 
+
+//function that returns the current time and date
+function currentDate(){
+    let date = new Date();
+    let time = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
+    let today = String(date.getDate()).padStart(2, '0') + "/" + String(date.getMonth() +1).padStart(2, '0') + "/" + date.getFullYear();
+    return (today + " " + time)
+}
+
+//function that returns a random id
+function generateId(){
+    return Math.floor(Math.random()*1000);
+}
+
 //function that creates finished task in the finished tasks table
 function createFinishedTodo(title,description,priority,time){
         //create todo row
@@ -134,7 +145,6 @@ $(document).ready(function(){
     //get finshed todos array from local storage
     let saved_finished_todos = JSON.parse(localStorage.getItem("finished_todos_array"));
 
-
     //create finished todo in finished tasks table        
     for(let i = 0; i<saved_finished_todos.length; i++){
 
@@ -145,21 +155,7 @@ $(document).ready(function(){
 
         createFinishedTodo(title,description,priority,time);
     }     
-
 })
-
-//function that returns the current time and date
-function currentDate(){
-    let date = new Date();
-    let time = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
-    let today = String(date.getDate()).padStart(2, '0') + "/" + String(date.getMonth() +1).padStart(2, '0') + "/" + date.getFullYear();
-    return (today + " " + time)
-}
-
-//function that returns a random id
-function generateId(){
-    return Math.floor(Math.random()*1000);
-}
 
 //when the user clicks the create button
 $("#create").click(function(){
@@ -176,8 +172,7 @@ $("#create").click(function(){
 
     //store todo values in localstorage
     localStorage.setItem(id, JSON.stringify(new_todo));
-
-  });
+});
 
 
 $(document).ready(function(){
@@ -190,7 +185,6 @@ $(document).ready(function(){
         var todo_id = $(this).attr("data-id");
         localStorage.removeItem(todo_id);
     })
-
 
     //when the user clicks on edit button
     $(".fa-edit").click(function(){
@@ -278,4 +272,3 @@ $(document).ready(function(){
     })
 
 })
-
