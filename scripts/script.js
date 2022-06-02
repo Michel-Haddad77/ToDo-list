@@ -1,3 +1,5 @@
+//array to store finished todo objects
+var finished_todos = []
 
 class Todo {
     constructor(id, title, description, priority, time) {
@@ -100,7 +102,7 @@ function createFinishedTodo(title,description,priority,time){
         row.append(created_at_td);
 }
 
-// on refresh, all the saved todos are fetched from local storag and created
+// on refresh, all the saved todos are fetched from local storage and created
 $(document).ready(function(){
     //for each item in local storage
     for(let i = 0; i<localStorage.length; i++){
@@ -118,6 +120,8 @@ $(document).ready(function(){
             new_todo.createTodo();
         }
     }
+
+
 })
 
 //function that returns the current time and date
@@ -221,6 +225,7 @@ $(document).ready(function(){
         })
     })
 
+    //TO BE FiXED 
     //when the user clicks on done button
     $(".fa-check").click(function(){
         //remove the row of the clicked button
@@ -236,10 +241,15 @@ $(document).ready(function(){
         let time = todo.time;
 
         createFinishedTodo(title,description,priority,time);
-        
+
+        //add finished task to finished todos array
+        finished_todos.push(todo);
+
+        //store array in local storage
+        localStorage.setItem("finished_todos_array", finished_todos);
+
         //remove the associated todo from local storage
         localStorage.removeItem(todo_id);
-
     })
 
 })
