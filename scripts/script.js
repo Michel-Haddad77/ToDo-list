@@ -31,6 +31,7 @@ class Todo {
         let done_btn = $("<i></i>");
         done_btn.addClass("fa fa-check fa-xl");
         done_btn.attr("data-id",this.id);
+        //add button functionality on creation
         done_btn.attr("onclick","doneFunction(this)");
         done_td.append(done_btn);
 
@@ -73,18 +74,19 @@ class Todo {
         let edit_btn = $("<i></i>");
         edit_btn.addClass("fa fa-edit fa-xl");
         edit_btn.attr("data-id",this.id);
+        //add button functionality on creation
         edit_btn.attr("onclick","editFunction(this)");
         buttons_td.append(edit_btn);
 
         let delete_btn = $("<i></i>");
         delete_btn.addClass("fa fa-trash fa-xl");
         delete_btn.attr("data-id",this.id);
+        //add button functionality on creation
         delete_btn.attr("onclick","deleteFunction(this)");
         buttons_td.append(delete_btn);
         
     }
 }
-
 
 //function that returns the current time and date
 function currentDate(){
@@ -270,11 +272,6 @@ $(document).ready(function(){
                 $(this).parent().show();
             }
         })
-    })
-
-    //when the user clicks on done button
-    // $(".fa-check").click(function(){
-
-    
+    })  
 
 })
