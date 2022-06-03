@@ -18,7 +18,7 @@ class Todo {
     }
 
     //Method that creates todo from the given values
-    createTodo() {
+    createTodo(doneFunction) {
         //create todo row
         let row = $("<tr></tr>");
         $("#todos-table").append(row);
@@ -31,6 +31,7 @@ class Todo {
         let done_btn = $("<i></i>");
         done_btn.addClass("fa fa-check fa-xl");
         done_btn.attr("data-id",this.id);
+        done_btn.attr("onclick","doneFunction(this)");
         done_td.append(done_btn);
 
         //create id section
@@ -72,11 +73,13 @@ class Todo {
         let edit_btn = $("<i></i>");
         edit_btn.addClass("fa fa-edit fa-xl");
         edit_btn.attr("data-id",this.id);
+        edit_btn.attr("onclick","editFunction(this)");
         buttons_td.append(edit_btn);
 
         let delete_btn = $("<i></i>");
         delete_btn.addClass("fa fa-trash fa-xl");
         delete_btn.attr("data-id",this.id);
+        delete_btn.attr("onclick","deleteFunction(this)");
         buttons_td.append(delete_btn);
         
     }
@@ -168,37 +171,62 @@ $("#create").click(function(){
 
     //create Todo
     let new_todo = new Todo(id,title,description,priority,current_date);
-    new_todo.createTodo();
+    new_todo.createTodo(doneFunction);
 
     //store todo values in localstorage
     localStorage.setItem(id, JSON.stringify(new_todo));
 });
 
+//when the user clicks on done button
+function doneFunction(btn){
+    //remove the row of the clicked button
+    $(btn).parent().parent().remove();
+
+    //create finished todo in finished tasks table
+    let todo_id = $(btn).attr("data-id");
+    let todo = JSON.parse(localStorage.getItem(todo_id));
+
+    let title = todo.title;
+    let description = todo.description;
+    let priority = todo.priority;
+    let time = todo.time;
+
+    createFinishedTodo(title,description,priority,time);
+
+    //add finished task to finished todos array
+    finished_todos.push(todo);
+
+    //store array in local storage
+    localStorage.setItem("finished_todos_array", JSON.stringify(finished_todos));
+
+    //remove the associated todo from local storage
+    localStorage.removeItem(todo_id);
+}
+
+//function when the user clicks on delete icon
+function deleteFunction(btn){
+     //remove the row of the clicked button
+     $(btn).parent().parent().remove();
+
+     //remove the associated todo from local storage
+     var todo_id = $(btn).attr("data-id");
+     localStorage.removeItem(todo_id);
+}
+
+//when the user clicks on edit button
+function editFunction(btn){
+    $(".popup").show();
+    let id_tobe_edited = $(btn).attr("data-id");
+    localStorage.setItem("id_tobe_edited",id_tobe_edited);
+
+    //when the user clicks the cancel button
+    $("#cancel").click(function(){
+        //close the popup
+        $(".popup").hide();
+    }) 
+}
 
 $(document).ready(function(){
-    //when the user clicks on delete icon
-    $(".fa-trash").click(function(){
-        //remove the row of the clicked button
-        $(this).parent().parent().remove();
-
-        //remove the associated todo from local storage
-        var todo_id = $(this).attr("data-id");
-        localStorage.removeItem(todo_id);
-    })
-
-    //when the user clicks on edit button
-    $(".fa-edit").click(function(){
-        $(".popup").show();
-        let id_tobe_edited = $(this).attr("data-id");
-        localStorage.setItem("id_tobe_edited",id_tobe_edited);
-
-        //when the user clicks the cancel button
-        $("#cancel").click(function(){
-            //close the popup
-            $(".popup").hide();
-        })
-
-    })
 
     //when the user clicks apply in popup
     $("#apply").click(function(){
@@ -245,30 +273,8 @@ $(document).ready(function(){
     })
 
     //when the user clicks on done button
-    $(".fa-check").click(function(){
+    // $(".fa-check").click(function(){
 
-        //remove the row of the clicked button
-        $(this).parent().parent().remove();
-
-        //create finished todo in finished tasks table
-        let todo_id = $(this).attr("data-id");
-        let todo = JSON.parse(localStorage.getItem(todo_id));
-
-        let title = todo.title;
-        let description = todo.description;
-        let priority = todo.priority;
-        let time = todo.time;
-
-        createFinishedTodo(title,description,priority,time);
-
-        //add finished task to finished todos array
-        finished_todos.push(todo);
-
-        //store array in local storage
-        localStorage.setItem("finished_todos_array", JSON.stringify(finished_todos));
-
-        //remove the associated todo from local storage
-        localStorage.removeItem(todo_id);
-    })
+    
 
 })
